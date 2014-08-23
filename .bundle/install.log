@@ -7,3 +7,15 @@ I, [2014-08-23T19:22:21.882114 #2354]  INFO -- : 0:  rack-protection (1.5.3) fro
 I, [2014-08-23T19:22:21.882362 #2354]  INFO -- : 0:  tilt (1.4.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/tilt-1.4.1.gemspec
 I, [2014-08-23T19:22:21.882593 #2354]  INFO -- : 0:  sinatra (1.4.5) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/sinatra-1.4.5.gemspec
 I, [2014-08-23T19:22:21.882814 #2354]  INFO -- : 0:  bundler (1.5.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353@global/specifications/bundler-1.5.1.gemspec
+I, [2014-08-23T20:27:14.046448 #2682]  INFO -- : 0:  backports (3.6.0) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/backports-3.6.0.gemspec
+I, [2014-08-23T20:27:14.047304 #2682]  INFO -- : 0:  json (1.8.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/json-1.8.1.gemspec
+I, [2014-08-23T20:27:14.047649 #2682]  INFO -- : 0:  multi_xml (0.5.5) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/multi_xml-0.5.5.gemspec
+I, [2014-08-23T20:27:14.047955 #2682]  INFO -- : 0:  httparty (0.13.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/httparty-0.13.1.gemspec
+I, [2014-08-23T20:27:14.048296 #2682]  INFO -- : 0:  multi_json (1.10.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/multi_json-1.10.1.gemspec
+I, [2014-08-23T20:27:14.048593 #2682]  INFO -- : 0:  rack (1.5.2) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/rack-1.5.2.gemspec
+I, [2014-08-23T20:27:14.048879 #2682]  INFO -- : 0:  rack-protection (1.5.3) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/rack-protection-1.5.3.gemspec
+I, [2014-08-23T20:27:14.049174 #2682]  INFO -- : 0:  rack-test (0.6.2) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/rack-test-0.6.2.gemspec
+I, [2014-08-23T20:27:14.049462 #2682]  INFO -- : 0:  tilt (1.4.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/tilt-1.4.1.gemspec
+I, [2014-08-23T20:27:14.049745 #2682]  INFO -- : 0:  sinatra (1.4.5) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/sinatra-1.4.5.gemspec
+I, [2014-08-23T20:27:14.946211 #2682]  INFO -- : 0:  sinatra-contrib (1.4.2) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/sinatra-contrib-1.4.2.gemspec
+I, [2014-08-23T20:27:14.946749 #2682]  INFO -- : 0:  bundler (1.5.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353@global/specifications/bundler-1.5.1.gemspec

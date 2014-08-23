@@ -1,14 +1,18 @@
-function checkin(id){
-  if(token == ""){ 
-    window.location.href = "/signin";
-  }else{
-    $.post("/checkin",{
-      venue_id: id,
-      token: token,
-    },function(response){
-      console.log(response);
-    })
-  }
+(function(){
+
+window.checkin = function (a,id){
+  $.post("/checkin",{
+    venue_id: id
+  },function(response){
+    if(response.meta == "signin"){
+      window.location.href = "/signin"
+    }else{
+      console.log(response)      
+      if(response.meta.code == 200){
+        $(a).replaceWith("Checked In ;)")
+      }
+    }
+  })
 }
 function success(position) {
   
@@ -65,7 +69,7 @@ function success(position) {
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
-            info.setContent(venue.name + "<br/>" + venue.location.address + "<br/><a href=\"javascript:checkin('"+venue.id+"');\">check in</a>");
+            info.setContent(venue.name + "<br/>" + venue.location.address + "<br/><a onclick=\"checkin(this,'"+venue.id+"');\">check in</a>");
             info.open(map, marker);
           }
         })(marker, i));
@@ -74,15 +78,12 @@ function success(position) {
     }
   })
 }
-
 function error(msg) {
   $('#status').text(typeof msg == 'string' ? msg : "Opps, something went wrong :'(");
 }
-
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(success, error);
 } else {
   error('not supported');
 }
-
-window.token = window.location.hash.substr(1);
+})(window);
