@@ -1,0 +1,9 @@
+# Logfile created on 2014-08-23 19:22:21 +0100 by logger.rb/41954
+I, [2014-08-23T19:22:21.881002 #2354]  INFO -- : 0:  json (1.8.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/json-1.8.1.gemspec
+I, [2014-08-23T19:22:21.881361 #2354]  INFO -- : 0:  multi_xml (0.5.5) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/multi_xml-0.5.5.gemspec
+I, [2014-08-23T19:22:21.881617 #2354]  INFO -- : 0:  httparty (0.13.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/httparty-0.13.1.gemspec
+I, [2014-08-23T19:22:21.881867 #2354]  INFO -- : 0:  rack (1.5.2) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/rack-1.5.2.gemspec
+I, [2014-08-23T19:22:21.882114 #2354]  INFO -- : 0:  rack-protection (1.5.3) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/rack-protection-1.5.3.gemspec
+I, [2014-08-23T19:22:21.882362 #2354]  INFO -- : 0:  tilt (1.4.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/tilt-1.4.1.gemspec
+I, [2014-08-23T19:22:21.882593 #2354]  INFO -- : 0:  sinatra (1.4.5) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353/specifications/sinatra-1.4.5.gemspec
+I, [2014-08-23T19:22:21.882814 #2354]  INFO -- : 0:  bundler (1.5.1) from /Users/onuruyar/.rvm/gems/ruby-2.0.0-p353@global/specifications/bundler-1.5.1.gemspec
