@@ -28,7 +28,7 @@ post "/" do
 end
 
 get "/signin" do
-  redirect "https://foursquare.com/oauth2/authenticate?client_id=#{ENV['FS_ID']}&response_type=token&redirect_uri=http://pubs.io/redirect"
+  redirect "https://foursquare.com/oauth2/authenticate?client_id=#{ENV['FS_ID']}&response_type=token&redirect_uri=http://www.pubs.io/redirect"
 end
 
 post "/checkin" do
