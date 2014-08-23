@@ -2,104 +2,23 @@
 <html>
 <head>
   <title>Pubs.io</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Find your local pub!">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
-  <style>
-  body{text-align:center;padding:0 0 48px 0;font-family: 'PT Serif', serif;font-size:16px;}
-  header{position:relative;top:-24px;}
-  h1{font-size:24px;position:relative;top:128px;}
-  #status{margin:0 0 24px 0;}
-  .pint{display:inline-block;width:148px;height:257px;background-image:url(pint.png);background-size:contain;}
-  #mapcanvas{display: inline-block;}
-  </style>
+  <link rel="stylesheet" href="/pub.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUVODqQp6rM79wlTWbq1v80N6rY1DiKko"></script>
   <header>
     <h1>Pubs.io</h1>
     <i class="pint"></i>
   </header>
   <article>
-    <div id="status">Find a pub, checking or comment on your local one!<br/><small>Tip: don't forget to allow geolocation request at top</small></div>
+    <div id="status">Find your local pub!<br/><small>Tip: don't forget to allow geolocation request at top</small></div>
   </article>
-  <script>
-  function success(position) {
-    
-    var status = $('#status');
-    status.text(typeof msg == 'string' ? msg : "Location retrived, searching nearby pubs...");
-        
-    $.post("/",{
-      method: "search",
-      ll: position.coords.latitude + "," + position.coords.longitude,
-      intent: "browse",
-      radius: 800,
-    },function(response){
-      
-      status.text("Here you go!");
-      var mapcanvas = document.createElement('div'),latlng,options,map,marker,venue,info;
-      mapcanvas.id = 'mapcanvas';
-      mapcanvas.style.height = '400px';
-      mapcanvas.style.width = '90%';
-    
-      $('article').append(mapcanvas);
-  
-      latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      options = {
-        zoom: 15,
-        center: latlng,
-        mapTypeControl: false,
-        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      map = new google.maps.Map(document.getElementById("mapcanvas"), options);
-  
-      marker = new google.maps.Marker({
-        position: latlng, 
-        map: map, 
-        title:"You are here! (at least within a " + position.coords.accuracy + " meter radius)"
-      });
-      
-      info = new google.maps.InfoWindow({
-        content: ""
-      });
-      
-      for(var i=0; i < response.response.venues.length; i++){
-        venue = response.response.venues[i];        
-        function addMarker(venue){
-          latlng = new google.maps.LatLng(venue.location.lat,venue.location.lng);
-          marker = new google.maps.Marker({
-            position: latlng, 
-            map: map, 
-            title: venue.name,
-            icon: '/ico.png',
-            draggable: false,
-            animation: google.maps.Animation.DROP
-          });
-
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-              info.setContent(venue.name + "<br/>" + venue.location.address);
-              info.open(map, marker);
-            }
-          })(marker, i));
-        }
-        setTimeout(addMarker,30*i,venue);
-      }
-    })
-  }
-
-  function error(msg) {
-    $('#status').text(typeof msg == 'string' ? msg : "Opps, something went wrong :'(");
-  
-    // console.log(arguments);
-  }
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, error);
-  } else {
-    error('not supported');
-  }
-
-  </script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUVODqQp6rM79wlTWbq1v80N6rY1DiKko"></script>
+  <script type="text/javascript" src="/pub.js"></script>
 </body>
 </html>

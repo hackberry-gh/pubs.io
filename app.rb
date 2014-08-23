@@ -9,8 +9,11 @@ get "/" do
   erb :index
 end
 
-post "/" do
+get "/redirect" do
+  erb :index
+end
 
+post "/" do
   response = HTTParty.get("https://api.foursquare.com/v2/venues/#{params[:method]}", {query: {
     client_id: ENV['FS_ID'], client_secret: ENV['FS_SECRET'], 
     ll: params[:ll], 
@@ -22,4 +25,20 @@ post "/" do
     }})
   content_type :json
   response.body
+end
+
+get "/signin" do
+  redirect "https://foursquare.com/oauth2/authenticate?client_id=#{ENV['FS_ID']}&response_type=token&redirect_uri=http://pubs.io/redirect"
+end
+
+post "/checkin" do
+  response = HTTParty.get("https://api.foursquare.com/v2/checkins/add", {body: {
+    client_id: ENV['FS_ID'], client_secret: ENV['FS_SECRET'], 
+    venueId: params[:venue_id], 
+    v: 20140806,
+    m: "foursquare"
+    }})
+  content_type :json
+  response.body
+  
 end
