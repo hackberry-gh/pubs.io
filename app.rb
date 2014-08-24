@@ -19,7 +19,7 @@ get "/redirect" do
   response = HTTParty.get("https://foursquare.com/oauth2/access_token", {query: {
     client_id: ENV['FS_ID'], client_secret: ENV['FS_SECRET'], 
     grant_type: "authorization_code",
-    redirect_uri: "http://localhost:5000/redirect",
+    redirect_uri: "http://www.pubs.io/redirect",
     code: params[:code],
     v: 20140806,
     m: "foursquare"    
@@ -47,7 +47,7 @@ post "/" do
 end
 
 get "/signin" do
-  redirect "https://foursquare.com/oauth2/authenticate?client_id=#{ENV['FS_ID']}&response_type=code&redirect_uri=http://localhost:5000/redirect"
+  redirect "https://foursquare.com/oauth2/authenticate?client_id=#{ENV['FS_ID']}&response_type=code&redirect_uri=http://www.pubs.io/redirect"
 end
 
 post "/checkin" do
