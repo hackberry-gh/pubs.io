@@ -66,6 +66,7 @@ function success(position) {
           return function() {
             info.setContent(venue.name + "<br/>" + venue.location.address + "<br/><a onclick=\"checkin(this,'"+venue.id+"');\">tap to check-in</a>");
             info.open(map, marker);
+            $("#venue").html("Loading photos of "+venue.name);
             $.get("/venue/"+venue.id,function(resp){
               $("#venue").empty();  
               $("#venue").append($("<h2>"+venue.name+"</h2><p>"+venue.location.address+"</p>")) 
