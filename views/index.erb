@@ -9,7 +9,7 @@
   <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/pub.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
-<body>
+<body data-uid="<%= session[:user_id] %>">
   <header>
     <h1>Pubs.io</h1>
     <i class="pint"></i>
@@ -30,23 +30,25 @@
           <a class="addCheckin">Checkin</a> &middot; 
           <a class="like">Like</a> &middot; 
           <a class="dislike">Dislike</a>
-          <br/>
-          <a class="openPhotos tab">Photos</a> &middot;
-          <a class="openTips tab">Tips</a>
+          <hr/>
+          <a class="open-photos tab">Photos</a> &middot;
+          <a class="open-tips tab">Tips</a>
         </nav>
         <div class="tabs">
-          <div class="tab photos">Loading...</div>
-          <div class="tab tips active"><form class="tipForm"><textarea></textarea><br/><input type="submit" value="Add your tip"></form><div class="list">Loading...</div></div>
+          <div class="tab photos"><div class="list">Loading...</div></div>
+          <div class="tab tips active">
+            <div class="tipForm"><textarea></textarea><br/><a class="addTip">Add your tip</a></div>
+            <div class="list">Loading...</div>
+          </div>
         </div>
       </div>
     </div>
   </article>
   <footer>
     <small>
-      <a target="_blank"  href="http://hackberry.biz">Made by Hackberry</a><br/>
-      Special thanks to <a target="_blank"  href="http://erkin.kin82.de">Erkin Gören</a> for lovely pint illustration. <br/>
-      Map data comes form Google (obviously) and all other actions use <a target="_blank" href="https://developer.foursquare.com/">FourSquare API.</a> <br/>
-      If you like to contribute or report a bug, here is the <a href="https://github.com/hackberry-gh/pubs-io">Github repo</a>.
+      Find your local pubs with no click!<br/>
+      Special thanks to <a target="_blank"  href="http://erkin.kin82.de">Erkin Gören</a> for lovely pint illustration.<br/>
+      <a target="_blank" href="https://github.com/hackberry-gh/pubs.io">Github Repo</a> &middot; <a target="_blank"  href="http://hackberry.biz">Made by Hackberry</a>
     </small>
   </footer>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

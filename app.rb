@@ -39,9 +39,17 @@ helpers do
     end
   end
   
+  def ensure_user_id
+    if signed_in? && session[:user_id].nil?
+      response = api(:get, "/users/self", {oauth_token: session[:token]})
+      session[:user_id] = response["response"]["user"]["id"]
+    end
+  end
+  
 end
 
 get "/" do
+  ensure_user_id
   erb :index
 end
 
@@ -56,6 +64,8 @@ get "/authenticate" do
     code: params[:code]
   }.update(settings.default_api_params)})
   session[:token] = JSON.parse(response.body)["access_token"]
+  
+  ensure_user_id
   
   if session[:post_signin_action]
 
@@ -99,6 +109,15 @@ post "/tips/add" do
     venueId: params[:venueId], 
     oauth_token: session[:token],
     text: params[:text]
+    })
+  response.body    
+end
+
+post "/tips/:id/delete" do
+  content_type :json  
+  authenticate!
+  response = api(:post, "/tips/#{params[:id]}/delete", {
+    oauth_token: session[:token]
     })
   response.body    
 end
