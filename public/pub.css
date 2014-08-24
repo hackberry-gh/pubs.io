@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 
-body{text-align:center;padding:24px 12px 48px 12px;font-family: 'PT Serif', serif;font-size:16px;line-height:24px;}
+body{text-align:center;padding:24px 12px 12px 12px;font-family: 'PT Serif', serif;font-size:16px;line-height:24px;}
 h1{font-size:24px;}
 h2{font-size:20px;margin-bottom:12px;}
 #status{margin:0 0 24px 0;}

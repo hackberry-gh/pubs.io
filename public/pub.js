@@ -93,7 +93,7 @@ if (navigator.geolocation) {
 }
 
 function setMapHeight(){
-  $("#mapcanvas").css("height",window.innerHeight - ($("#mapcanvas").offset().top + 48))
+  $("#mapcanvas").css("height",Math.max(window.innerHeight - ($("#mapcanvas").offset().top + 12),260))
 }
 window.onresize=setMapHeight;
 window.orientationchange=setMapHeight;
