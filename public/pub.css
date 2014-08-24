@@ -47,19 +47,146 @@ table {
 	border-spacing: 0;
 }
 
-body{text-align:center;padding:24px 12px 12px 12px;font-family: 'PT Serif', serif;font-size:16px;line-height:24px;}
-h1{font-size:24px;}
-h2{font-size:20px;margin-bottom:12px;}
-#status{margin:0 0 24px 0;}
-.pint{margin:12px 0;display:inline-block;width:74px;height:128px;background-image:url(pint.png);background-size:contain;}
-#mapcanvas{display: inline-block;width:100%;}
+body{
+  text-align:center;
+  padding:24px 12px 12px 12px;
+  font-family: 'PT Serif', serif;
+  font-size:16px;
+  line-height:24px;
+}
+h1{font-size:24px;line-height:48px;}
+h2{font-size:20px;line-height:48px;}
+p{margin:12px 0;}
+textarea,input{ 
+  font-family: 'PT Serif', serif; 
+  font-size:16px;
+  line-height:24px;
+}
+small{font-size:12px;line-height:18px;}
+.pint{
+  display:inline-block;
+  width:77px;
+  height:128px;
+  background-image:url(pint.png);
+  background-size:contain;
+}
+#mapcanvas{display:inline-block;width:100%;}
 a{color:#994526;cursor:pointer;}
-#venue{margin-top:12px;}
-#venue p{margin-bottom:12px;}
-#venue img{width:100%;height:auto;max-width:300px;max-height:500px;margin:0 3px;}
+#venue{max-width:960px;margin:0 auto;min-height:560px;display:none;}
+#venue nav{margin:24px 0;}
+.user{position:relative;}
+.user small{  
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  margin-left: 22px;
+}
+img.photo{
+  width:100%;
+  height:auto;
+  max-width:300px;
+  max-height:500px;
+  margin:0 3px;
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;
+}
+img.avatar{
+  width:32px;
+  height:32px;
+  display:inline;
+  border-radius: 32px;-webkit-border-radius: 32px;-moz-border-radius: 32px;
+  vertical-align:middle;
+}
+a.tab.active{border-bottom: 4px solid;padding-bottom: 4px;}
+div.tab{display:none;}
+div.tab.active{display:block;}
+div.tab.tips img.photo{margin-top:12px;}
+div.tip{margin-bottom: 48px;}
+.tipForm{display:hidden;margin: 24px 0;}
+.tipForm textarea{
+  width: 100%;
+  max-width: 400px;
+  height: 48px;
+  resize: none;
+  outline:none;
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;  
+}
+input[type=submit]{
+  border: none;
+  background: none;
+  font-family: 'PT Serif', serif;
+  font-size: 16px;
+  line-height: 24px;
+  background-color:#994526;
+  cursor:pointer;
+  color:#fff;
+  padding:6px;
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;  
+}
+a.pubInfo{text-decoration:none;}
+/* ============================================================================================================================
+== PINCHED SPEECH BUBBLE (more CSS3)
+** ============================================================================================================================ */
+
+.pinched {
+  position:relative;
+  padding:15px;
+  margin:20px 0 0 0;
+  text-align:center;
+  color:#333;
+  background:#ECDDC2;
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;
+}
+
+/* creates a rectangle of the colour wanted for the pointy bit */
+.pinched:before {
+  content:"";
+  position:absolute;
+  top:-20px;
+  left:50%;
+  width:100px;
+  height:20px;
+  margin:0 0 0 -50px;
+  background:#ECDDC2;
+}
+
+/* creates a rounded rectangle to cover part of the rectangle generated above */
+.pinched:after {
+  content:"";
+  position:absolute;
+  top:-20px;
+  left:0;
+  width:50%;
+  height:20px;
+  background:#fff;
+  /* css3 */
+  -webkit-border-bottom-right-radius:15px;
+  -moz-border-radius-bottomright:15px;
+  border-bottom-right-radius:15px;
+}
+
+/* creates the other rounded rectangle */
+.pinched > :first-child:before {
+  content:"";
+  position:absolute;
+  top:-20px;
+  right:0;
+  width:50%;
+  height:20px;
+  background:#fff;
+  /* css3 */
+  -webkit-border-bottom-left-radius:15px;
+  -moz-border-radius-bottomleft:15px;
+  border-bottom-left-radius:15px;
+}
+
 /* iPhone 5 */
 @media only screen and (max-height: 568px) {
   .pint{
-    width: 37px;
-    height: 64px;
+    width: 38px;
+    height: 63px;
+  }
+}
+/* biggers */
+@media only screen and (min-width: 768px) {
+  .tab.tips{max-width:560px;margin:0 auto;}
 }

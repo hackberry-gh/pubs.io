@@ -15,12 +15,50 @@
     <i class="pint"></i>
   </header>
   <article>
-    <div id="status">Locating, please wait...<br/><small>Tip: don't forget to allow geolocation request</small></div>
+    <p id="status">Locating, please wait...<br/><small>Tip: don't forget to allow geolocation request</small></p>
     <div id="mapcanvas"></div>
-    <div id="venue"></div>
+    <div id="venue">
+      <a name="venue"></a>
+      <div class="content">
+        <h2></h2>
+        <p></p>
+        <div class="info">
+          <span class="checkins"></span>, 
+          <span class="tips"></span>              
+        </div>
+        <nav>
+          <a class="addCheckin">Checkin</a> &middot; 
+          <a class="like">Like</a> &middot; 
+          <a class="dislike">Dislike</a>
+          <br/>
+          <a class="openPhotos tab">Photos</a> &middot;
+          <a class="openTips tab">Tips</a>
+        </nav>
+        <div class="tabs">
+          <div class="tab photos">Loading...</div>
+          <div class="tab tips active"><form class="tipForm"><textarea></textarea><br/><input type="submit" value="Add your tip"></form><div class="list">Loading...</div></div>
+        </div>
+      </div>
+    </div>
   </article>
+  <footer>
+    <small>
+      <a target="_blank"  href="http://hackberry.biz">Made by Hackberry</a><br/>
+      Special thanks to <a target="_blank"  href="http://erkin.kin82.de">Erkin Gören</a> for lovely pint illustration. <br/>
+      Map data comes form Google (obviously) and all other actions use <a target="_blank" href="https://developer.foursquare.com/">FourSquare API.</a> <br/>
+      If you like to contribute or report a bug, here is the <a href="https://github.com/hackberry-gh/pubs-io">Github repo</a>.
+    </small>
+  </footer>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUVODqQp6rM79wlTWbq1v80N6rY1DiKko"></script>
   <script type="text/javascript" src="/pub.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-53494982-2', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>
