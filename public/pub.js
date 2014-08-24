@@ -292,7 +292,7 @@
           position: latlng, 
           map: map, 
           title: venue.name,
-          icon: '/ico.png',
+          icon: new google.maps.MarkerImage("/ico.png", null, null, null, new google.maps.Size(27,32)),
           draggable: false,
           animation: google.maps.Animation.DROP
         });

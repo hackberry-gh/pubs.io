@@ -47,12 +47,17 @@ table {
 	border-spacing: 0;
 }
 
+/* Main Styles */
 body{
   text-align:center;
   padding:24px 12px 12px 12px;
   font-family: 'PT Serif', serif;
   font-size:16px;
   line-height:24px;
+	overflow-x:hidden;
+	overflow-y:auto;
+  -webkit-overflow-scrolling: touch;  
+  -webkit-font-smoothing: antialiased;
 }
 h1{font-size:24px;line-height:48px;}
 h2{font-size:20px;line-height:48px;}
