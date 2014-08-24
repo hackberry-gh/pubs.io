@@ -47,11 +47,19 @@ table {
 	border-spacing: 0;
 }
 
-
-
-body{text-align:center;padding:24px 12px 48px 12px;font-family: 'PT Serif', serif;font-size:16px;}
+body{text-align:center;padding:24px 12px 48px 12px;font-family: 'PT Serif', serif;font-size:16px;line-height:24px;}
 h1{font-size:24px;}
+h2{font-size:20px;margin-bottom:12px;}
 #status{margin:0 0 24px 0;}
 .pint{margin:12px 0;display:inline-block;width:74px;height:128px;background-image:url(pint.png);background-size:contain;}
-#mapcanvas{display: inline-block;}
-a{color:#994526;}
+#mapcanvas{display: inline-block;width:100%;}
+a{color:#994526;cursor:pointer;}
+#venue{margin-top:12px;}
+#venue p{margin-bottom:12px;}
+#venue img{width:100%;height:auto;max-width:300px;max-height:500px;margin:0 3px;}
+/* iPhone 5 */
+@media only screen and (max-height: 568px) {
+  .pint{
+    width: 37px;
+    height: 64px;
+}

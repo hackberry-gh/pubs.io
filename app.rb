@@ -67,3 +67,13 @@ post "/checkin" do
   end
   
 end
+
+get "/venue/:id" do
+  content_type :json
+  response = HTTParty.get("https://api.foursquare.com/v2/venues/#{params[:id]}/photos",{query: {
+      client_id: ENV['FS_ID'], client_secret: ENV['FS_SECRET'], 
+      v: 20140806,
+      m: "foursquare"
+      }})
+  response.body
+end

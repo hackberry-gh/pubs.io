@@ -1,15 +1,15 @@
 (function(){
 
 window.checkin = function (a,id){
+  $(a).text("...").attr("disabled",true);
   $.post("/checkin",{
     venue_id: id
   },function(response){
     if(response.meta == "signin"){
       window.location.href = "/signin"
-    }else{
-      console.log(response)      
+    }else{     
       if(response.meta.code == 200){
-        $(a).replaceWith("Checked In ;)")
+        $(a).replaceWith("Checked in ;)")
       }
     }
   })
@@ -27,12 +27,7 @@ function success(position) {
   },function(response){
     
     status.text("Here you go!");
-    var mapcanvas = document.createElement('div'),latlng,options,map,marker,venue,info;
-    mapcanvas.id = 'mapcanvas';
-    mapcanvas.style.height = '400px';
-    mapcanvas.style.width = '100%';
-  
-    $('article').append(mapcanvas);
+    var latlng,options,map,marker,venue,info;
 
     latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     options = {
@@ -69,8 +64,17 @@ function success(position) {
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
-            info.setContent(venue.name + "<br/>" + venue.location.address + "<br/><a onclick=\"checkin(this,'"+venue.id+"');\">check in</a>");
+            info.setContent(venue.name + "<br/>" + venue.location.address + "<br/><a onclick=\"checkin(this,'"+venue.id+"');\">tap to check-in</a>");
             info.open(map, marker);
+            $.get("/venue/"+venue.id,function(resp){
+              $("#venue").empty();  
+              $("#venue").append($("<h2>"+venue.name+"</h2><p>"+venue.location.address+"</p>")) 
+              for(var i=0;i<resp.response.photos.items.length;i++){
+                var p = resp.response.photos.items[i],
+                src = p.prefix+"300x500"+p.suffix;
+                $("#venue").append($('<img src="'+src+'"/>'));
+              }
+            });
           }
         })(marker, i));
       }
@@ -86,4 +90,11 @@ if (navigator.geolocation) {
 } else {
   error('not supported');
 }
+
+function setMapHeight(){
+  $("#mapcanvas").css("height",window.innerHeight - ($("#mapcanvas").offset().top + 48))
+}
+window.onresize=setMapHeight;
+window.orientationchange=setMapHeight;
+setMapHeight();
 })(window);
