@@ -72,8 +72,34 @@ small{font-size:12px;line-height:18px;}
 article{position:relative;}
 a{color:#994526;cursor:pointer;}
 a.pubInfo{text-decoration:none;}
-a.tab{margin:0 8px;}
-a.tab.active{border-bottom: 4px solid;padding-bottom: 4px;}
+.tabNav{
+  border: 1px solid #994526;
+  margin-top: 12px;
+  width: 199px;
+  margin: 48px auto;
+  border-radius: 46px;
+  height: 36px;
+  position: relative;
+}
+a.tab{
+  margin: 0;
+  padding: 0;
+  width: 55%;
+  height: 32px;
+  display: inline-block;
+  border-radius: 48px;
+  background: #fff;
+  line-height: 32px;
+  position: absolute;
+  top: 1px;
+  border: 1px solid #fff;
+}
+a.open-photos{left: 1px;}
+a.open-tips{right: 1px;}
+a.tab.active{
+  border: 1px solid #994526;
+  z-index: 2;
+}
 .button{
   display: inline-block;
   padding: 8px 16px;
@@ -81,6 +107,7 @@ a.tab.active{border-bottom: 4px solid;padding-bottom: 4px;}
   background:none;
   margin: 0 4px;
   color:#E59500;
+  
   border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;      
 }
 .logo{
@@ -109,7 +136,7 @@ hr{
 }
 #status{margin: 6px 0;position: absolute;width: 100%;}
 #mapcanvas{display:inline-block;width:100%;margin-top:42px;}
-#venue{max-width:960px;margin:0 auto;min-height:560px;display:none;}
+#venue{max-width:960px;margin:0 auto;display:none;}
 #venue nav{margin:24px 0;}
 .user{position:relative;}
 .user small.name{  
@@ -125,6 +152,7 @@ hr{
   margin-right: 22px;
   text-align: right;
   height: 16px;
+  width:140px;
   overflow: hidden;
   color:#999;
 }
@@ -143,8 +171,8 @@ img.avatar{
   border-radius: 32px;-webkit-border-radius: 32px;-moz-border-radius: 32px;
   vertical-align:middle;
 }
-div.tab{display:none;}
-div.tab.active{display:block;}
+div.tab{visibility:hidden;height:0;}
+div.tab.active{visibility:visible;height:auto;}
 div.tab.tips img.photo{margin-top:12px;}
 div.tip{margin-bottom: 48px;position:relative;}
 .tipForm{display:hidden;margin: 12px 0 48px;}
@@ -172,7 +200,31 @@ div.tip{margin-bottom: 48px;position:relative;}
   z-index: 2;
   font-size: 24px;
 }
-
+.mapLabel{
+  position: absolute; 
+  display: none;
+  font-size:8px;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.7;
+}
+.mapLabel.active{
+  z-index:5;
+  font-size:12px;  
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;  
+}
+.mapLabel span{
+  position: relative; 
+  left: -50%; 
+  top: -4px;
+  white-space: nowrap; 
+  border: 1px solid #E59500;
+  padding: 4px; 
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;    
+  background-color: white;
+}
 /* ============================================================================================================================
 == PINCHED SPEECH BUBBLE (more CSS3)
 ** ============================================================================================================================ */
@@ -236,7 +288,7 @@ div.tip{margin-bottom: 48px;position:relative;}
     height:64px;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 542px) {
   .addTip{
     padding:8px 5%;
     display:block;

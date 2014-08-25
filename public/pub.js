@@ -1,12 +1,78 @@
 (function(window){
   
+  // Label
+  
+  // Define the overlay, derived from google.maps.OverlayView
+  function Label(opt_options) {
+   // Initialization
+   this.setValues(opt_options);
+   // Label specific
+   var 
+   span = this.span_ = document.createElement('span'),
+   div = this.div_ = document.createElement('div');
+   div.appendChild(span);
+   div.className = "mapLabel";
+  };
+  Label.prototype = new google.maps.OverlayView;
+
+  // Implement onAdd
+  Label.prototype.onAdd = function() {
+   var pane = this.getPanes().overlayLayer;
+   pane.appendChild(this.div_);
+
+   // Ensures the label is redrawn if the text or position is changed.
+   var me = this;
+   this.listeners_ = [
+     google.maps.event.addListener(this, 'position_changed',
+         function() { me.draw(); }),
+     google.maps.event.addListener(this, 'active_changed',
+         function() { me.draw(); })
+   ];
+  };
+
+  // Implement onRemove
+  Label.prototype.onRemove = function() {
+   this.div_.parentNode.removeChild(this.div_);
+
+   // Label is removed from the map, stop updating its position/text.
+   for (var i = 0, I = this.listeners_.length; i < I; ++i) {
+     google.maps.event.removeListener(this.listeners_[i]);
+   }
+  };
+
+  // Implement draw
+  Label.prototype.draw = function() {
+   var 
+   projection = this.getProjection(),
+   position = projection.fromLatLngToDivPixel(this.get('position')),
+   div = this.div_,
+   pane = this.get('active') ? this.getPanes().floatPane : this.getPanes().overlayLayer;
+   pane.appendChild(this.div_);
+   
+   div.style.left = position.x + 'px';
+   div.style.top = position.y + 4 + 'px';
+   div.style.display = 'block';
+   div.className =  this.get('active') ? "mapLabel active" : "mapLabel" ;
+   this.span_.innerHTML = this.get('text').toString();
+  };
+  
+  // ----------------------------------------------------------------------- //
+  
+  // Main
+  
+  
+  
   var 
+  
+  currentVenueId = null,
     
   venues = [],
-    
-  currentVenueId = null,
+  
+  markers = [],
   
   userId = $("body").data("uid"),
+  
+  scrolledToTabs = false,
   
   tipTmp = $('<div class="tip">' +
   '<div class="user">' +
@@ -28,9 +94,11 @@
     $("#status").text(msg);
   }
     
-  function openPubInfo(e) {
+  // function openPubInfo(e) {
+  function openPubInfo(i) {    
       
-    var venue = venues[$(e.currentTarget).data("pi")];
+    // var venue = venues[$(e.currentTarget).data("pi")];
+    var venue = venues[i];    
     currentVenueId = venue.id;      
     $("#venue .content h2").text(venue.name);
     $("#venue .content p").text(venue.location.address);      
@@ -41,19 +109,23 @@
     $(".tab.tips .list").empty();
     $(".tab.photos .list").empty();    
     openTips(venue.id);
+    // document.body.scrollTop = $("#mapcanvas").offset().top - 12;
+    $('html, body').stop().animate({
+        scrollTop: $("#mapcanvas").offset().top - 12 //$("#mapcanvas").offset().top + $("#mapcanvas").height() / 2 - 32
+    }, 400)    
   }
     
   function openPhotos(e) {
-      
+    
     setActiveTab("photos");
-      
+              
     if($(".tab.photos img").length == 0) {
       
       var $list = $(".tab.photos .list");
       $list.html("Loading...");
                 
       api("GET", "/venues/" + currentVenueId + "/photos",{}, function(response) {
-          
+              
         var 
         photos = response.response.photos.items,
         i = 0,
@@ -63,9 +135,11 @@
           
         for(i = 0; i < photos.length; i++) {
           photo = photos[i];
-          $list.append($('<img src="' + photo.prefix + "300x500" + photo.suffix + '" class="photo"/>'));
+          $list.append($('<img width="300" height="500" src="' + photo.prefix + "300x500" + photo.suffix + '" class="photo"/>'));
         }
-      })
+        
+        setTabScrollTop();
+      });
 
     }
   }
@@ -73,14 +147,14 @@
   function openTips(e) {
       
     setActiveTab("tips");
-      
+    
     if($(".tab.tips .list .tip").length == 0){
       
       var $list = $(".tab.tips .list");
       $list.html("Loading...");
         
       api("GET", "/venues/" + currentVenueId + "/tips",{}, function(response) {
-        
+            
         var 
         tips = response.response.tips.items,
         i = 0;
@@ -90,6 +164,8 @@
         for(i = 0; i < tips.length; i++) { 
           $list.append(renderTip(tips[i]));
         }
+        
+        setTabScrollTop();
       });
         
     }
@@ -194,6 +270,18 @@
     $(".tab." + tabClass).addClass("active");            
   }
   
+  function setTabScrollTop(){
+    // document.body.scrollTop = $(".tabNav").offset().top - 12;
+    // if(document.body.scrollTop <= ($("#mapcanvas").offset().top - 12)) {
+    // if(!scrolledToTabs){
+    //   scrolledToTabs = true;
+    //   $('html, body').stop().animate({
+    //       scrollTop: ($(".tabNav").offset().top - 12)
+    //   }, 400);
+    // }
+    // }
+  }
+  
   function apiErrorHandler(xhr,err,msg,callee){
     if(xhr.status == 401){
       window.location.href = "/signin";
@@ -277,9 +365,10 @@
   }
   
   function addVenueMarkers() {
-    var info,venue;
+    // var info,venue,label;
+    var venue,label;    
     
-    info = new google.maps.InfoWindow({content: ""});
+    //info = new google.maps.InfoWindow({content: ""});
 
     for(var i=0; i < venues.length; i++){
       
@@ -294,25 +383,44 @@
           title: venue.name,
           icon: new google.maps.MarkerImage("/ico.png", null, null, null, new google.maps.Size(27,32)),
           draggable: false,
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          active: false
         });
-
+        label = new Label({
+          map: map,
+          text: venue.name,
+          active: false
+        });
+        label.bindTo('position', marker, 'position');
+        label.bindTo('active', marker, 'active');
+        
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
-            map.setCenter(new google.maps.LatLng(venue.location.lat,venue.location.lng))
-            info.setContent(
-              '<a class="pubInfo" href="#venue" data-pi="' + i + '">' + 
-              '<div style="padding:12px">' +
-              venue.name + 
-              (typeof venue.location.address == "undefined" ? "" : "<br/>" + venue.location.address) +
-              '</div>' +  
-              '</a>'
-            );
-            info.open(map, marker);
+            for(var m=0;m<markers.length;m++){
+              markers[m].set("active",false);
+            }
+            marker.set("active",true);
+            map.panTo(new google.maps.LatLng(venue.location.lat,venue.location.lng));
+            
+            // info.setContent(
+//               // '<a class="pubInfo" href="#map" data-pi="' + i + '">' +
+//               // '<div style="padding:4px">' +
+//               venue.name
+//               // (typeof venue.location.address == "undefined" ? "" : "<br/>" + venue.location.address) +
+//               // '</div>' +
+//               // '</a>'
+              openPubInfo(i);
+//             );
+
+
+            // info.open(map, marker);
           }
         })(marker, i));
+        
+        markers.push(marker);
       }
-      setTimeout(addMarker, 60 * i, venue, i);
+
+      setTimeout(addMarker, 60 * i, venue, i);      
     }
   }
   
@@ -345,7 +453,7 @@
   if (window.navigator.geolocation) {
     window.navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
     
-    $(document).on( "click", ".pubInfo", {}, openPubInfo);
+    // $(document).on( "click", ".pubInfo", {}, openPubInfo);
   
     $(document).on( "click", ".addCheckin", {}, addCheckin);
     $(document).on( "click", ".like", {}, like );

@@ -17,7 +17,7 @@
   <meta property='og:type' content='website' >
   <meta property='og:description' content='Find your local pubs with no click!.'>
   <meta property='og:url' content='http://www.pubs.io/' >
-  <meta property='og:image' content='http://www.pubs.io/pint.png'>
+  <meta property='og:image' content='http://www.pubs.io/apple-touch-icon-144x144-precomposed.png'>
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="white">
@@ -42,7 +42,6 @@
     <p id="status">Locating, please wait...<br/><small>Tip: don't forget to allow geolocation request</small></p>
     <div id="mapcanvas"></div>
     <div id="venue">
-      <a name="venue"></a>
       <div class="content">
         <h2></h2>
         <p></p>
@@ -54,13 +53,14 @@
           <a class="addCheckin button">Checkin</a>
           <a class="like button">Like</a>
           <a class="dislike button">Dislike</a>
-          <hr/>
-          <a class="open-photos tab">Photos</a>
-          <a class="open-tips tab">Tips</a>
+          <div class="tabNav">
+            <a class="open-photos tab">Photos</a>
+            <a class="open-tips tab">Tips</a>
+          </div>
         </nav>
         <div class="tabs">
           <div class="tab photos"><div class="list">Loading...</div></div>
-          <div class="tab tips active">
+          <div class="tab tips">
             <div class="tipForm"><textarea placeholder="Would you like to share your thoughts about this pub?"></textarea><a class="addTip button">Add</a></div>
             <div class="list">Loading...</div>
           </div>
