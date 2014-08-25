@@ -68,6 +68,30 @@ textarea,input{
   line-height:24px;
 }
 small{font-size:12px;line-height:18px;}
+
+article{position:relative;}
+a{color:#994526;cursor:pointer;}
+a.pubInfo{text-decoration:none;}
+a.tab{margin:0 8px;}
+a.tab.active{border-bottom: 4px solid;padding-bottom: 4px;}
+.button{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #E59500;
+  margin: 0 12px;
+  font-weight:700;
+  color:#fff;
+  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;      
+}
+hr{
+  padding: 0;
+  height: 1px;
+  line-height: 1px;
+  border: none;
+  font-size: 0;
+  background-color: #ECDDC2;
+  margin: 12px 0;
+}
 .pint{
   display:inline-block;
   width:77px;
@@ -75,16 +99,26 @@ small{font-size:12px;line-height:18px;}
   background-image:url(pint.png);
   background-size:contain;
 }
-#mapcanvas{display:inline-block;width:100%;}
-a{color:#994526;cursor:pointer;}
+#status{margin: 6px 0;position: absolute;width: 100%;}
+#mapcanvas{display:inline-block;width:100%;margin-top:42px;}
 #venue{max-width:960px;margin:0 auto;min-height:560px;display:none;}
 #venue nav{margin:24px 0;}
 .user{position:relative;}
-.user small{  
+.user small.name{  
   position: absolute;
   left: 50%;
   top: 6px;
   margin-left: 22px;
+}
+.user small.date{  
+  position: absolute;
+  right: 50%;
+  top: 6px;
+  margin-right: 22px;
+  text-align: right;
+  height: 16px;
+  overflow: hidden;
+  font-style: italic;
 }
 img.photo{
   width:100%;
@@ -101,13 +135,13 @@ img.avatar{
   border-radius: 32px;-webkit-border-radius: 32px;-moz-border-radius: 32px;
   vertical-align:middle;
 }
-a.tab.active{border-bottom: 4px solid;padding-bottom: 4px;}
 div.tab{display:none;}
 div.tab.active{display:block;}
 div.tab.tips img.photo{margin-top:12px;}
 div.tip{margin-bottom: 48px;position:relative;}
-.tipForm{display:hidden;margin: 24px 0;}
+.tipForm{display:hidden;margin: 12px 0 48px;}
 .tipForm textarea{
+  padding:8px;
   width: 100%;
   max-width: 400px;
   height: 48px;
@@ -116,36 +150,10 @@ div.tip{margin-bottom: 48px;position:relative;}
   border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;  
   border-color:#ECDDC2;
 }
-input[type=submit]{
-  border: none;
-  background: none;
-  font-family: 'PT Serif', serif;
-  font-size: 16px;
-  line-height: 24px;
-  background-color:#994526;
-  cursor:pointer;
-  color:#fff;
-  padding:6px;
-  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;  
-}
-a.pubInfo{text-decoration:none;}
-hr{padding: 0;
-height: 1px;
-line-height: 1px;
-border: none;
-font-size: 0;
-background-color: #ECDDC2;
-margin: 12px 0;}
-.tipForm{
-  padding: 24px;
-  margin-bottom: 12px;
-}
 .addTip{
-  padding: 12px;
-  display: inline-block;
   background: #994526;
-  color: #fff;
-  border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;    
+  padding:21px 16px;
+  vertical-align:top;
 }
 .deleteTip{
   position: absolute;
@@ -154,6 +162,7 @@ margin: 12px 0;}
   z-index: 2;
   font-size: 24px;
 }
+
 /* ============================================================================================================================
 == PINCHED SPEECH BUBBLE (more CSS3)
 ** ============================================================================================================================ */

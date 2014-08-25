@@ -10,9 +10,9 @@
   
   tipTmp = $('<div class="tip">' +
   '<div class="user">' +
-  '<img class="avatar"><small></small>' +
+  '<small class="date"></small><img class="avatar"><small class="name"></small>' +
   '</div>' +
-  '<div class="pinched"><p></p><small class="date"></small><img class="photo"></div>' +
+  '<div class="pinched"><p></p><img class="photo"></div>' +
   '</div>');
     
   function showError(msg) {
@@ -334,7 +334,7 @@
   }
   
   function setMapHeight(){
-    $("#mapcanvas").css("height",Math.max(window.innerHeight - ($("#mapcanvas").offset().top + 12),260))
+    $("#mapcanvas").css("height",Math.max(window.innerHeight - ($("#mapcanvas").offset().top + $("footer").height() + 18),260))
   }
       
   // Initialize!
@@ -361,5 +361,6 @@
   } else {
     showError('Sorry, but your browser is not supported or you did not allow geolocation request');
   }
+
 
 })(window);
